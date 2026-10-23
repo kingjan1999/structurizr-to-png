@@ -3,6 +3,7 @@ package com.extendaretail.dsl2png;
 import com.structurizr.Workspace;
 import com.structurizr.dsl.StructurizrDslParser;
 import com.structurizr.dsl.StructurizrDslParserException;
+import com.structurizr.http.HttpClient;
 import com.structurizr.model.SoftwareSystem;
 import com.structurizr.view.ComponentView;
 import com.structurizr.view.Configuration;
@@ -16,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.slf4j.Logger;
@@ -114,7 +116,12 @@ public class WorkspaceReader {
       config.addTheme("http://127.0.0.1:" + themePort + "/themes/theme.json");
     }
     try {
-      ThemeUtils.loadThemes(workspace);
+      HttpClient httpClient = new HttpClient();
+      // Only permit the themes explicitly referenced by the workspace.
+      for (String theme : config.getThemes()) {
+        httpClient.allow(Pattern.quote(theme));
+      }
+      ThemeUtils.loadThemes(workspace, httpClient);
     } catch (Exception e) {
       throw new IOException("Failed to load theme", e);
     }
