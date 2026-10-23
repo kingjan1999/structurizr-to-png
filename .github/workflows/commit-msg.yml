@@ -7,6 +7,9 @@ on:
       - reopened
       - synchronize
 
+permissions:
+  contents: read
+
 jobs:
   commitlint:
     runs-on: ubuntu-latest
@@ -15,13 +18,24 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Lint pull request title
-        uses: extenda/actions/commitlint@v0
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
         with:
-          message: ${{ github.event.pull_request.title }}
+          node-version: 22
+
+      - name: Install commitlint
+        run: |
+          npm install --no-save @commitlint/cli @commitlint/config-conventional
+          echo "export default { extends: ['@commitlint/config-conventional'] };" > commitlint.config.mjs
+
+      - name: Lint pull request title
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: printf '%s\n' "$PR_TITLE" | npx commitlint --verbose
 
       - name: Lint commit messages
         if: always()
-        uses: extenda/actions/commitlint@v0
-        with:
-          relaxed: ${{ contains(job.status, 'success') }}
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: npx commitlint --from "$BASE_SHA" --to "$HEAD_SHA" --verbose

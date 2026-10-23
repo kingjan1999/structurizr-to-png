@@ -1,4 +1,4 @@
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=extenda_structurizr-to-png&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=extenda_structurizr-to-png)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=kingjan1999_structurizr-to-png&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=kingjan1999_structurizr-to-png)
 
 # structurizr-to-png
 
@@ -35,16 +35,16 @@ and name it `dsl2png.sh`.
 ```bash
 #!/bin/sh
 set -e
-docker pull --quiet extenda/structurizr-to-png
-exec docker run --rm -it -v "$(pwd)":/docs -p 3000:3000 extenda/structurizr-to-png "$@"
+docker pull --quiet kingjan1999/structurizr-to-png
+exec docker run --rm -it -v "$(pwd)":/docs -p 3000:3000 kingjan1999/structurizr-to-png "$@"
 ```
 
 Or, if you're using Windows, create `dsl2png.cmd`.
 
 ```cmd
 @echo off
-docker pull --quiet extenda/structurizr-to-png
-docker run --rm -it -v "%CD%":/docs -p 3000:3000 extenda/structurizr-to-png %*
+docker pull --quiet kingjan1999/structurizr-to-png
+docker run --rm -it -v "%CD%":/docs -p 3000:3000 kingjan1999/structurizr-to-png %*
 ```
 
 With these scripts, users will be upgraded to the latest available version and also don't need to remember the lengthy
@@ -57,7 +57,7 @@ docker command. To watch a directory for changes to DSL files, simply run:
 ## :whale: Docker
 
 ```bash
-$ docker run --rm -it -v $(pwd):/docs extenda/structurizr-to-png
+$ docker run --rm -it -v $(pwd):/docs kingjan1999/structurizr-to-png
 ```
 
 The convention is to generate diagrams to an `images/` directory inside the working directory. The default working
@@ -67,14 +67,14 @@ directory and it's subdirectories.
 To render particular dsl files, use the `--path` option (glob is supported). Relative paths are treated from DSL file directory.
 
 ```bash
-$ docker run --rm -it -v $(pwd):/docs extenda/structurizr-to-png --path workspace.ecd.dsl
+$ docker run --rm -it -v $(pwd):/docs kingjan1999/structurizr-to-png --path workspace.ecd.dsl
 ```
 
 To change the default output location, use the `--output` option. If specified as a relative path, it is resolved from
 DSL file directory.
 
 ```bash
-$ docker run --rm -it -v $(pwd):/docs extenda/structurizr-to-png --output c4-diagrams
+$ docker run --rm -it -v $(pwd):/docs kingjan1999/structurizr-to-png --output c4-diagrams
 ```
 
 The above example will write files to the `c4-diagrams` directory in the current working directory.
@@ -84,7 +84,7 @@ The above example will write files to the `c4-diagrams` directory in the current
 To use the live preview functionality, we must add the `--watch` flag and a port binding.
 
 ```bash
-$ docker run --rm -it -v $(pwd):/docs -p 3000:3000 extenda/structurizr-to-png --watch
+$ docker run --rm -it -v $(pwd):/docs -p 3000:3000 kingjan1999/structurizr-to-png --watch
 ```
 
 Open https://localhost:3000 in your browser to see the preview images. The images will update when the DSL is changed.
@@ -183,7 +183,7 @@ The following view properties are supported with the `structurizr` renderer.
   pre-commit install -t pre-commit -t commit-msg
   ```
   * Commit messages must follow [conventional commits](https://conventionalcommits.org)
-  * [SonarCloud](https://sonarcloud.io/dashboard?id=extenda_structurizr-to-png)
+  * [SonarCloud](https://sonarcloud.io/dashboard?id=kingjan1999_structurizr-to-png)
     quality gates must pass for all pull requests
 
 # :balance_scale: License

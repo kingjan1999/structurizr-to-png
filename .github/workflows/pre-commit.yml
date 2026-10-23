@@ -1,6 +1,9 @@
 name: pre-commit
 on: pull_request
 
+permissions:
+  contents: read
+
 jobs:
   all-files:
     runs-on: ubuntu-latest
@@ -15,6 +18,11 @@ jobs:
 
       - name: Setup Python
         uses: actions/setup-python@v6
+        with:
+          python-version: '3.x'
+
+      - name: Install pre-commit
+        run: pip install pre-commit
 
       - name: Run pre-commit
-        uses: pre-commit/actions@v3.0.1
+        run: pre-commit run --all-files --show-diff-on-failure
