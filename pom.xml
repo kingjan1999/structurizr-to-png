@@ -38,6 +38,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     <sonar.junit.reportPaths>${project.build.directory}/surefire-reports</sonar.junit.reportPaths>
+    <structurizr.version>6.2.3</structurizr.version>
   </properties>
 
   <dependencyManagement>
@@ -83,22 +84,22 @@
       <dependency>
         <groupId>com.structurizr</groupId>
         <artifactId>structurizr-client</artifactId>
-        <version>4.1.0</version>
+        <version>${structurizr.version}</version>
       </dependency>
       <dependency>
         <groupId>com.structurizr</groupId>
         <artifactId>structurizr-core</artifactId>
-        <version>4.1.0</version>
+        <version>${structurizr.version}</version>
       </dependency>
       <dependency>
         <groupId>com.structurizr</groupId>
         <artifactId>structurizr-dsl</artifactId>
-        <version>4.1.0</version>
+        <version>${structurizr.version}</version>
       </dependency>
       <dependency>
         <groupId>com.structurizr</groupId>
         <artifactId>structurizr-export</artifactId>
-        <version>4.1.0</version>
+        <version>${structurizr.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
